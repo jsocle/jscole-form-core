@@ -12,5 +12,6 @@ public class FormTest {
         val form = TestForm(parameters("name" to "john"))
 
         Assert.assertEquals("name", form.name.name)
+        Assert.assertArrayEquals(arrayOf("john"), form.name.raw)
     }
 }
