@@ -1,11 +1,12 @@
 package com.github.jsocle.form
 
-public abstract class Field {
-    val raw: Array<String> get() = information!!.form.parameters[name] ?: arrayOf()
+public abstract class Field<T: Any?> {
+    public abstract val value: T
+    public val raw: Array<String> get() = information!!.form.parameters[name] ?: arrayOf()
 
     public val name: String get() = information!!.propertyMetadata.name
 
-    private var information: Information? = null
+    protected var information: Information? = null
 
     fun initialize(form: Form, propertyMetadata: PropertyMetadata) {
         if (information == null) {
@@ -13,10 +14,10 @@ public abstract class Field {
         }
     }
 
-    private class Information(val form: Form, val propertyMetadata: PropertyMetadata)
+    public class Information(public val form: Form, public val propertyMetadata: PropertyMetadata)
 }
 
-public fun <T : Field> T.get(form: Form, propertyMetadata: PropertyMetadata): T {
+public fun <T : Field<*>> T.get(form: Form, propertyMetadata: PropertyMetadata): T {
     initialize(form, propertyMetadata)
     return this
 }
