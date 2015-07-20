@@ -10,11 +10,11 @@ public class FormTest {
             val firstName by StringField()
             val lastName by StringField()
             val age by IntField()
-
             val page by IntField(0)
+            val birthYear by IntField()
         }
 
-        val form = TestForm(parameters("firstName" to "john", "age" to "31"))
+        val form = TestForm(parameters("firstName" to "john", "age" to "31", "birthYear" to "1980s"))
 
         Assert.assertEquals("firstName", form.firstName.name)
         Assert.assertArrayEquals(arrayOf("john"), form.firstName.raw)
@@ -33,6 +33,11 @@ public class FormTest {
         Assert.assertEquals(31, form.age.value)
         Assert.assertEquals(Input(type = "text", name = "age", value = "31"), form.age.render())
 
+        // test convert failed
+        Assert.assertEquals(listOf("Not a valid integer value"), form.birthYear.errors)
+        Assert.assertArrayEquals(arrayOf("1980s"), form.birthYear.raw)
+        Assert.assertEquals(null, form.birthYear.value)
+
         // test default value was not applied.
         Assert.assertEquals(null, form.page.value)
         Assert.assertEquals(0, form.page.value ?: form.page.default)
@@ -40,5 +45,6 @@ public class FormTest {
         // test default value was applied.
         val defaultForm = TestForm(parameters())
         Assert.assertEquals(0, defaultForm.page.value)
+
     }
 }

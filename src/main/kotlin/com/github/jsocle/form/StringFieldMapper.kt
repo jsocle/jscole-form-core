@@ -1,5 +1,5 @@
 package com.github.jsocle.form
 
 public class StringFieldMapper : FieldMapper<String?>() {
-    override fun fromString(string: String?): String? = string
+    override fun fromString(field: Field<String?, *>, string: String?): String? = string
 }
