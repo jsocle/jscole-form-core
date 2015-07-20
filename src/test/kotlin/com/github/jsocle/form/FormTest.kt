@@ -10,6 +10,8 @@ public class FormTest {
             val firstName by StringField()
             val lastName by StringField()
             val age by IntField()
+
+            val page by IntField(0)
         }
 
         val form = TestForm(parameters("firstName" to "john", "age" to "31"))
@@ -30,5 +32,11 @@ public class FormTest {
         Assert.assertArrayEquals(arrayOf("31"), form.age.raw)
         Assert.assertEquals(31, form.age.value)
         Assert.assertEquals(Input(type = "text", name = "age", value = "31"), form.age.render())
+
+        Assert.assertEquals(null, form.page.value)
+        Assert.assertEquals(0, form.page.value ?: form.page.default)
+
+        val defaultForm = TestForm(parameters())
+        Assert.assertEquals(0, defaultForm.page.value)
     }
 }

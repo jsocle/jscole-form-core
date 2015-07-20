@@ -5,8 +5,8 @@ import com.github.jsocle.html.Node
 public abstract class Field<T : Any?, N : Node> {
     public abstract val value: T
     public val raw: Array<String> get() = information!!.form.parameters[name] ?: arrayOf()
-
     public val name: String get() = information!!.propertyMetadata.name
+    public val form: Form get() = information!!.form
 
     protected var information: Information? = null
 
