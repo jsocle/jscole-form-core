@@ -33,9 +33,11 @@ public class FormTest {
         Assert.assertEquals(31, form.age.value)
         Assert.assertEquals(Input(type = "text", name = "age", value = "31"), form.age.render())
 
+        // test default value was not applied.
         Assert.assertEquals(null, form.page.value)
         Assert.assertEquals(0, form.page.value ?: form.page.default)
 
+        // test default value was applied.
         val defaultForm = TestForm(parameters())
         Assert.assertEquals(0, defaultForm.page.value)
     }
