@@ -5,7 +5,8 @@ import com.github.jsocle.html.Node
 public abstract class Field<T : Any?, N : Node> {
     public val errors: MutableList<String> = arrayListOf()
     public abstract var value: T
-    public val raw: Array<String> get() = information!!.form.parameters[name] ?: arrayOf()
+    public var raw: Array<String> = arrayOf()
+        protected set
     public val name: String get() = information!!.propertyMetadata.name
     public val form: Form get() = information!!.form
 
@@ -14,6 +15,7 @@ public abstract class Field<T : Any?, N : Node> {
     fun initialize(form: Form, propertyMetadata: PropertyMetadata) {
         if (information == null) {
             information = Information(form, propertyMetadata)
+            raw = information!!.form.parameters[name] ?: arrayOf()
             processParameters()
         }
     }

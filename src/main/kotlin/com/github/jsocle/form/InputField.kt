@@ -6,6 +6,8 @@ public open class InputField<T>(private val mapper: FieldMapper<T>, public val d
     override var value: T = null
         set(value: T) {
             $value = value
+            val stringValue = mapper.toString(value)
+            raw = if (stringValue != null) arrayOf(stringValue) else arrayOf()
         }
 
     override fun processParameters() {
