@@ -1,12 +1,16 @@
-package com.github.jsocle.form
+package com.github.jsocle.form.test
 
+import com.github.jsocle.form.Form
+import com.github.jsocle.form.IntField
+import com.github.jsocle.form.StringField
+import com.github.jsocle.form.get
 import com.github.jsocle.html.elements.Input
 import org.junit.Assert
 import org.junit.Test
 
 public class FormTest {
     Test public fun test() {
-        class TestForm(parameters: Map<String, Array<String>>) : Form(parameters) {
+        class TestForm : Form() {
             val firstName by StringField()
             val lastName by StringField()
             val age by IntField()
@@ -14,7 +18,8 @@ public class FormTest {
             val birthYear by IntField()
         }
 
-        val form = TestForm(parameters("firstName" to "john", "age" to "31", "birthYear" to "1980s"))
+        parameters("firstName" to "john", "age" to "31", "birthYear" to "1980s")
+        val form = TestForm()
 
         Assert.assertEquals("firstName", form.firstName.name)
         Assert.assertArrayEquals(arrayOf("john"), form.firstName.raw)
@@ -59,7 +64,8 @@ public class FormTest {
         Assert.assertEquals(0, form.page.value ?: form.page.default)
 
         // test default value was applied.
-        val defaultForm = TestForm(parameters())
+        parameters()
+        val defaultForm = TestForm()
         Assert.assertEquals(0, defaultForm.page.value)
 
     }
