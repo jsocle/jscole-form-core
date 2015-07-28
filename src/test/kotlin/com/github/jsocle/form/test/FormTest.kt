@@ -14,6 +14,7 @@ public class FormTest {
             val page by IntField(0)
             val birthYear by IntField()
             val content by TextareaField()
+            val style by StringField()
         }
 
         parameters("firstName" to "john", "age" to "31", "birthYear" to "1980s", "content" to "<p>content</p>")
@@ -66,10 +67,14 @@ public class FormTest {
         Assert.assertEquals("<p>content</p>", form.content.value)
         Assert.assertEquals("""<textarea name="content">&lt;p&gt;content&lt;/p&gt;</textarea>""", form.content.render().toString())
 
+        Assert.assertEquals(
+                Input(name = "style", type = "text", style = "display: none;"),
+                form.style.render { style = "display: none;" }
+        )
+
         // test default value was applied.
         parameters()
         val defaultForm = TestForm()
         Assert.assertEquals(0, defaultForm.page.value)
-
     }
 }

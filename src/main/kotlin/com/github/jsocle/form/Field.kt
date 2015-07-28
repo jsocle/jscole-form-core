@@ -23,6 +23,12 @@ public abstract class Field<T : Any?, N : Node> {
     public class Information(public val form: Form, public val propertyMetadata: PropertyMetadata)
 
     public abstract fun render(): N
+    public fun render(map: N.() -> Unit): N {
+        val node = render()
+        node.map()
+        return node
+    }
+
     public abstract fun processParameters()
 }
 
