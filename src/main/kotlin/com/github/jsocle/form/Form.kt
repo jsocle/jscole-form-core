@@ -1,11 +1,9 @@
 package com.github.jsocle.form
 
-import com.github.jsocle.form.request
-
-public abstract class Form {
+public abstract class Form(parameters: Map<String, Array<String>>? = null) {
     public val parameters: Map<String, Array<String>>
 
     init {
-        parameters = request.parameters()
+        this.parameters = parameters ?: request.parameters()
     }
 }
