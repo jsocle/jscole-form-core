@@ -19,13 +19,16 @@ public class FormTest {
             val notChecked by BooleanField()
         }
 
-        parameters("firstName" to "john", "age" to "31", "birthYear" to "1980s", "content" to "<p>content</p>", "checked" to "true")
+        parameters(
+                "firstName" to " john ", "age" to "31", "birthYear" to "1980s", "content" to "<p>content</p>",
+                "checked" to "true"
+        )
         val form = TestForm()
 
         Assert.assertEquals("firstName", form.firstName.name)
-        Assert.assertArrayEquals(arrayOf("john"), form.firstName.raw)
+        Assert.assertArrayEquals(arrayOf(" john "), form.firstName.raw)
         Assert.assertEquals("john", form.firstName.value)
-        Assert.assertEquals(Input(name = "firstName", type = "text", value = "john"), form.firstName.render())
+        Assert.assertEquals(Input(name = "firstName", type = "text", value = " john "), form.firstName.render())
         // test value string setter
         form.firstName.value = "noah";
         Assert.assertEquals("noah", form.firstName.value)
