@@ -15,9 +15,11 @@ public class FormTest {
             val birthYear by IntField()
             val content by TextareaField()
             val style by StringField()
+            val checked by BooleanField()
+            val notChecked by BooleanField()
         }
 
-        parameters("firstName" to "john", "age" to "31", "birthYear" to "1980s", "content" to "<p>content</p>")
+        parameters("firstName" to "john", "age" to "31", "birthYear" to "1980s", "content" to "<p>content</p>", "checked" to "true")
         val form = TestForm()
 
         Assert.assertEquals("firstName", form.firstName.name)
@@ -71,6 +73,14 @@ public class FormTest {
                 Input(name = "style", type = "text", style = "display: none;"),
                 form.style.render { style = "display: none;" }
         )
+
+        // test boolean
+        Assert.assertTrue(form.checked.value ?: false)
+        Assert.assertEquals(
+                Input(name = "checked", type = "checkbox", value = "true", checked = "checked"), form.checked.render()
+        )
+        Assert.assertFalse(form.notChecked.value ?: false)
+        Assert.assertEquals(Input(name = "notChecked", type = "checkbox", value = "true"), form.notChecked.render())
 
         // test default value was applied.
         parameters()
