@@ -6,4 +6,9 @@ public abstract class Form(parameters: Map<String, Array<String>>? = null) {
     init {
         this.parameters = parameters ?: request.parameters()
     }
+
+    protected fun <T : Field<*, *>> T.get(form: Form, propertyMetadata: PropertyMetadata): T {
+        initialize(form, propertyMetadata)
+        return this
+    }
 }

@@ -2,7 +2,6 @@ package com.github.jsocle.form.test
 
 import com.github.jsocle.form.Form
 import com.github.jsocle.form.IntField
-import com.github.jsocle.form.get
 import org.junit.Assert
 import org.junit.Test
 

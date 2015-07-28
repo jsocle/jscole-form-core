@@ -31,8 +31,3 @@ public abstract class Field<T : Any?, N : Node> {
 
     public abstract fun processParameters()
 }
-
-public fun <T : Field<*, *>> T.get(form: Form, propertyMetadata: PropertyMetadata): T {
-    initialize(form, propertyMetadata)
-    return this
-}
