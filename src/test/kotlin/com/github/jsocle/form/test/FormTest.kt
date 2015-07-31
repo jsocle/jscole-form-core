@@ -17,6 +17,7 @@ public class FormTest {
             val style by StringField()
             val checked by BooleanField()
             val notChecked by BooleanField()
+            val password by PasswordField()
         }
 
         parameters(
@@ -84,6 +85,10 @@ public class FormTest {
         )
         Assert.assertFalse(form.notChecked.value ?: false)
         Assert.assertEquals(Input(name = "notChecked", type = "checkbox", value = "true"), form.notChecked.render())
+
+        // test password field
+        form.password.value = "password"
+        Assert.assertEquals("""<input name="password" type="password">""", form.password.render().toString())
 
         // test default value was applied.
         parameters()
