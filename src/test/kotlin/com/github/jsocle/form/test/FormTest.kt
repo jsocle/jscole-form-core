@@ -18,11 +18,12 @@ public class FormTest {
             val checked by BooleanField()
             val notChecked by BooleanField()
             val password by PasswordField()
+            val sex by SelectStringField(choices = listOf("m" to "Male", "f" to "Female"))
         }
 
         parameters(
                 "firstName" to " john ", "age" to "31", "birthYear" to "1980s", "content" to "<p>content</p>",
-                "checked" to "true"
+                "checked" to "true", "sex" to "f"
         )
         val form = TestForm()
 
@@ -89,6 +90,12 @@ public class FormTest {
         // test password field
         form.password.value = "password"
         Assert.assertEquals("""<input name="password" type="password">""", form.password.render().toString())
+
+        // test select field
+        Assert.assertEquals(
+                """<select name="sex"><option value="m">Male</option><option selected="selected" value="f">Female</option></select>""",
+                form.sex.render().toString()
+        )
 
         // test default value was applied.
         parameters()

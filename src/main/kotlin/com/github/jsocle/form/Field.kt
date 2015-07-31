@@ -4,7 +4,6 @@ import com.github.jsocle.html.Node
 
 public abstract class Field<T : Any?, N : Node> {
     public val errors: MutableList<String> = arrayListOf()
-    public abstract var value: T
     public var raw: Array<String> = arrayOf()
         protected set
     public val name: String get() = information!!.propertyMetadata.name
