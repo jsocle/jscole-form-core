@@ -18,20 +18,19 @@ public abstract class Field<T : Any?, N : Node>(protected val mapper: FieldMappe
             }
             return values.map { mapper.toString(it) }.filter { it != null }.map { it!! }.toTypedArray()
         }
-        protected set
+    private var information: Information? = null
     public val name: String get() = information!!.propertyMetadata.name
     public val form: Form get() = information!!.form
 
-    protected var information: Information? = null
 
     fun initialize(form: Form, propertyMetadata: PropertyMetadata) {
         if (information == null) {
             information = Information(form, propertyMetadata)
-            $raw = information!!.form.parameters[name] ?: arrayOf()
 
             if (form.parameters.size() == 0) {
                 values = defaults
             } else {
+                $raw = information!!.form.parameters[name] ?: arrayOf()
                 $values = $raw.map { mapper.fromString(this, it) }.filter { it != null }
             }
         }
