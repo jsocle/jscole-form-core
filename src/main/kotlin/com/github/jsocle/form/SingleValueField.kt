@@ -2,19 +2,21 @@ package com.github.jsocle.form
 
 import com.github.jsocle.html.Node
 
-public abstract class SingleValueField<T, N : Node>(protected val mapper: FieldMapper<T>, public val default: T = null) : Field<T, N>() {
-    public var value: T = null
+public abstract class SingleValueField<T : Any?, N : Node>(mapper: FieldMapper<T>, public val default: T = null) :
+        Field<T, N>(mapper, default.toList()) {
+    public var value: T
+        get() {
+            // values.firstOrNull() dose not work
+            if (values.size() == 0) {
+                return null
+            }
+            return values.first()
+        }
         set(value: T) {
-            $value = value
-            val stringValue = mapper.toString(value)
-            raw = if (stringValue != null) arrayOf(stringValue) else arrayOf()
+            values = value.toList()
         }
+}
 
-    override fun processParameters() {
-        if (form.parameters.size() == 0) {
-            value = default
-        } else {
-            $value = mapper.fromString(this, raw.firstOrNull())
-        }
-    }
+private fun <T : Any?> T.toList(): List<T> {
+    return if (this == null) listOf() else listOf(this)
 }
