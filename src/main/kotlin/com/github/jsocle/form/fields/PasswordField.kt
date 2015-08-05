@@ -1,5 +1,6 @@
-package com.github.jsocle.form
+package com.github.jsocle.form.fields
 
+import com.github.jsocle.form.fields.StringField
 import com.github.jsocle.html.elements.Input
 
 public class PasswordField : StringField() {

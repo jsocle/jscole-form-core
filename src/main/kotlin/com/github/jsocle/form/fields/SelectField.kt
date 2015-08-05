@@ -1,5 +1,7 @@
-package com.github.jsocle.form
+package com.github.jsocle.form.fields
 
+import com.github.jsocle.form.FieldMapper
+import com.github.jsocle.form.SingleValueField
 import com.github.jsocle.html.elements.Select
 
 public open class SelectField<T>(public var choices: List<Pair<T, String>>, mapper: FieldMapper<T>, default: T = null) : SingleValueField<T, Select>(mapper, default) {

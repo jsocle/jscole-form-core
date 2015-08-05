@@ -1,5 +1,7 @@
-package com.github.jsocle.form
+package com.github.jsocle.form.fields
 
+import com.github.jsocle.form.BooleanMapper
+import com.github.jsocle.form.SingleValueField
 import com.github.jsocle.html.elements.Input
 
 public class BooleanField : SingleValueField<Boolean?, Input>(BooleanMapper()) {

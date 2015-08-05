@@ -1,6 +1,7 @@
 package com.github.jsocle.form.test
 
 import com.github.jsocle.form.*
+import com.github.jsocle.form.fields.*
 import com.github.jsocle.html.elements.Input
 import org.junit.Assert
 import org.junit.Test
