@@ -14,6 +14,6 @@ object testRequest {
 }
 
 fun parameters(vararg parameters: Pair<String, String>) {
-    testRequest.parameters = parameters.map { it.first to arrayOf(it.second) }.toMap()
+    testRequest.parameters = parameters.groupBy { it.first }.mapValues { it.value.map { it.second }.toTypedArray() }
 }
 

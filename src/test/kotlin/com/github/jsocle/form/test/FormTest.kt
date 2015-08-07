@@ -20,11 +20,15 @@ public class FormTest {
             val notChecked by BooleanField()
             val password by PasswordField()
             val sex by SelectStringField(choices = listOf("m" to "Male", "f" to "Female"))
+            val hobbies by MultipleSelectStringField(
+                    listOf("collector" to "Collecting", "artist" to "Performing arts",
+                            "producer" to "Creative hobbies")
+            )
         }
 
         parameters(
                 "firstName" to " john ", "age" to "31", "birthYear" to "1980s", "content" to "<p>content</p>",
-                "checked" to "true", "sex" to "f"
+                "checked" to "true", "sex" to "f", "hobbies" to "artist", "hobbies" to "producer"
         )
         val form = TestForm()
 
@@ -96,6 +100,13 @@ public class FormTest {
         Assert.assertEquals(
                 """<select name="sex"><option value="m">Male</option><option selected="selected" value="f">Female</option></select>""",
                 form.sex.render().toString()
+        )
+
+        // test select multiple
+        Assert.assertEquals(listOf("artist", "producer"), form.hobbies.values)
+        Assert.assertEquals(
+                """<select multiple="true" name="hobbies"><option value="collector">Collecting</option><option selected="selected" value="artist">Performing arts</option><option selected="selected" value="producer">Creative hobbies</option></select>""",
+                form.hobbies.render().toString()
         )
 
         // test default value was applied.

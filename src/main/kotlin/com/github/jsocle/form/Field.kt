@@ -3,7 +3,7 @@ package com.github.jsocle.form
 import com.github.jsocle.html.Node
 
 public abstract class Field<T : Any?, N : Node>(protected val mapper: FieldMapper<T>,
-                                                public val defaults: List<T> = listOf()) {
+                                                public val defaults: List<T>) {
     public val errors: MutableList<String> = arrayListOf()
     public var values: List<T> = listOf()
         set(values: List<T>) {
