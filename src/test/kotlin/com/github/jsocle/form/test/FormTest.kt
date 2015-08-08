@@ -24,11 +24,13 @@ public class FormTest {
                     listOf("collector" to "Collecting", "artist" to "Performing arts",
                             "producer" to "Creative hobbies")
             )
+            val trustJava by RadioStrinfField(listOf("yes" to "Yes", "no" to "No", "neutral" to "Neutral"))
         }
 
         parameters(
                 "firstName" to " john ", "age" to "31", "birthYear" to "1980s", "content" to "<p>content</p>",
-                "checked" to "true", "sex" to "f", "hobbies" to "artist", "hobbies" to "producer"
+                "checked" to "true", "sex" to "f", "hobbies" to "artist", "hobbies" to "producer",
+                "trustJava" to "no"
         )
         val form = TestForm()
 
@@ -107,6 +109,13 @@ public class FormTest {
         Assert.assertEquals(
                 """<select multiple="true" name="hobbies"><option value="collector">Collecting</option><option selected="selected" value="artist">Performing arts</option><option selected="selected" value="producer">Creative hobbies</option></select>""",
                 form.hobbies.render().toString()
+        )
+
+        // test radio field
+        Assert.assertEquals("no", form.trustJava.value)
+        Assert.assertEquals(
+                """<ul class="jsocle-form-field-radio"><li><label><input name="trustJava" type="radio" value="yes">Yes</label></li><li><label><input name="trustJava" type="radio" value="no">No</label></li><li><label><input name="trustJava" type="radio" value="neutral">Neutral</label></li></ul>""",
+                form.trustJava.render().toString()
         )
 
         // test default value was applied.
