@@ -25,12 +25,15 @@ public class FormTest {
                             "producer" to "Creative hobbies")
             )
             val trustJava by RadioStringField(listOf("yes" to "Yes", "no" to "No", "neutral" to "Neutral"))
+            val genres by CheckboxStingField(
+                    listOf("rock" to "Rock", "pop" to "Pop", "alternative" to "Alternative")
+            )
         }
 
         parameters(
                 "firstName" to " john ", "age" to "31", "birthYear" to "1980s", "content" to "<p>content</p>",
                 "checked" to "true", "sex" to "f", "hobbies" to "artist", "hobbies" to "producer",
-                "trustJava" to "no"
+                "trustJava" to "no", "genres" to "rock", "genres" to "pop"
         )
         val form = TestForm()
 
@@ -116,6 +119,12 @@ public class FormTest {
         Assert.assertEquals(
                 """<ul class="jsocle-form-field-radio"><li><label><input name="trustJava" type="radio" value="yes">Yes</label></li><li><label><input checked="checked" name="trustJava" type="radio" value="no">No</label></li><li><label><input name="trustJava" type="radio" value="neutral">Neutral</label></li></ul>""",
                 form.trustJava.render().toString()
+        )
+
+        Assert.assertEquals(setOf("rock", "pop"), form.genres.values.toSet())
+        Assert.assertEquals(
+                """<ul class="jsocle-form-field-checkbox"><li><label><input checked="checked" name="genres" type="checkbox" value="rock">Rock</label></li><li><label><input checked="checked" name="genres" type="checkbox" value="pop">Pop</label></li><li><label><input name="genres" type="checkbox" value="alternative">Alternative</label></li></ul>""",
+                form.genres.render().toString()
         )
 
         // test default value was applied.
