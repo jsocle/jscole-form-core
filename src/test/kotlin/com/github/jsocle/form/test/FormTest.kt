@@ -24,7 +24,7 @@ public class FormTest {
                     listOf("collector" to "Collecting", "artist" to "Performing arts",
                             "producer" to "Creative hobbies")
             )
-            val trustJava by RadioStrinfField(listOf("yes" to "Yes", "no" to "No", "neutral" to "Neutral"))
+            val trustJava by RadioStringField(listOf("yes" to "Yes", "no" to "No", "neutral" to "Neutral"))
         }
 
         parameters(
