@@ -107,14 +107,14 @@ public class FormTest {
         // test select multiple
         Assert.assertEquals(listOf("artist", "producer"), form.hobbies.values)
         Assert.assertEquals(
-                """<select multiple="true" name="hobbies"><option value="collector">Collecting</option><option selected="selected" value="artist">Performing arts</option><option selected="selected" value="producer">Creative hobbies</option></select>""",
+                """<select multiple="multiple" name="hobbies"><option value="collector">Collecting</option><option selected="selected" value="artist">Performing arts</option><option selected="selected" value="producer">Creative hobbies</option></select>""",
                 form.hobbies.render().toString()
         )
 
         // test radio field
         Assert.assertEquals("no", form.trustJava.value)
         Assert.assertEquals(
-                """<ul class="jsocle-form-field-radio"><li><label><input name="trustJava" type="radio" value="yes">Yes</label></li><li><label><input name="trustJava" type="radio" value="no">No</label></li><li><label><input name="trustJava" type="radio" value="neutral">Neutral</label></li></ul>""",
+                """<ul class="jsocle-form-field-radio"><li><label><input name="trustJava" type="radio" value="yes">Yes</label></li><li><label><input checked="checked" name="trustJava" type="radio" value="no">No</label></li><li><label><input name="trustJava" type="radio" value="neutral">Neutral</label></li></ul>""",
                 form.trustJava.render().toString()
         )
 

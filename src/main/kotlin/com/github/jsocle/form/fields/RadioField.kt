@@ -11,7 +11,8 @@ public open class RadioField<T : Any?>(public var choices: List<Pair<T, String>>
             choices.forEach {
                 li {
                     label {
-                        input(name = name, type = "radio", value = mapper.toString(it.first))
+                        val checked = if (it.first == this@RadioField.value) "checked" else null
+                        input(name = name, type = "radio", value = mapper.toString(it.first), checked = checked)
                         +it.second
                     }
                 }
