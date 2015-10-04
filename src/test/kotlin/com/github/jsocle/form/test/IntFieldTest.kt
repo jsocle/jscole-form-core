@@ -10,13 +10,13 @@ public class IntFieldTest {
         val age by IntField()
     }
 
-    Test public fun testValue() {
+    @Test public fun testValue() {
         parameters("age" to "23")
         val form = TestForm()
         Assert.assertEquals(23, form.age.value)
     }
 
-    Test public fun testNullValue() {
+    @Test public fun testNullValue() {
         parameters()
         val form = TestForm()
         Assert.assertNull(form.age.value)

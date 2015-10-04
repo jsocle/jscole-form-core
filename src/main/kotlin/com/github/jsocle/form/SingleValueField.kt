@@ -2,9 +2,9 @@ package com.github.jsocle.form
 
 import com.github.jsocle.html.Node
 
-public abstract class SingleValueField<T : Any?, N : Node>(mapper: FieldMapper<T>, public val default: T = null) :
-        Field<T, N>(mapper, default.toList()) {
-    public var value: T
+public abstract class SingleValueField<T, N : Node>(mapper: FieldMapper<T>, @Suppress("BASE_WITH_NULLABLE_UPPER_BOUND") public val default: T? = null) :
+        Field<T, N>(mapper, default?.toList() ?: listOf()) {
+    public var value: T?
         get() {
             // values.firstOrNull() dose not work
             if (values.size() == 0) {
@@ -12,8 +12,8 @@ public abstract class SingleValueField<T : Any?, N : Node>(mapper: FieldMapper<T
             }
             return values.first()
         }
-        set(value: T) {
-            values = value.toList()
+        set(value: T?) {
+            values = value?.toList() ?: listOf()
         }
 }
 

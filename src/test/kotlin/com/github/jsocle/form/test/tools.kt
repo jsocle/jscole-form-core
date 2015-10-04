@@ -13,7 +13,7 @@ object testRequest {
         }
 }
 
-fun parameters(vararg parameters: Pair<String, String>) {
+public @SafeVarargs fun parameters(vararg parameters: Pair<String, String>) {
     testRequest.parameters = parameters.groupBy { it.first }.mapValues { it.value.map { it.second }.toTypedArray() }
 }
 

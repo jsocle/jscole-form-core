@@ -7,7 +7,7 @@ import org.junit.Assert
 import org.junit.Test
 
 public class FormTest {
-    Test public fun test() {
+    @Test public fun test() {
         class TestForm : Form() {
             val firstName by StringField()
             val lastName by StringField()
