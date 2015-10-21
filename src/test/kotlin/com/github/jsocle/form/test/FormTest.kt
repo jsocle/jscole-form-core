@@ -2,12 +2,14 @@ package com.github.jsocle.form.test
 
 import com.github.jsocle.form.Form
 import com.github.jsocle.form.fields.*
+import com.github.jsocle.form.validators.Required
 import com.github.jsocle.html.elements.Input
 import org.junit.Assert
 import org.junit.Test
 
 public class FormTest {
-    @Test public fun test() {
+    @Test
+    fun test() {
         class TestForm : Form() {
             val firstName by StringField()
             val lastName by StringField()
@@ -131,5 +133,31 @@ public class FormTest {
         parameters()
         val defaultForm = TestForm()
         Assert.assertEquals(0, defaultForm.page.value)
+    }
+
+    @Test
+    fun testValidate() {
+        class TestForm : Form() {
+            val string by StringField(validators = arrayOf(Required()))
+        }
+
+        parameters()
+        // validateOnPost() should return false on GET
+        Assert.assertFalse(TestForm().validateOnPost())
+
+        parameters(method = "POST")
+        val form = TestForm()
+        Assert.assertFalse(form.validateOnPost())
+        Assert.assertEquals(listOf("This field is required."), form.string.errors)
+    }
+
+    @Test
+    fun testFields() {
+        val form = object : Form() {
+            val id by StringField()
+            val password by PasswordField()
+        }
+
+        Assert.assertArrayEquals(arrayOf(form.id, form.password), form.fields)
     }
 }

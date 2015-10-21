@@ -1,20 +1,21 @@
 package com.github.jsocle.form
 
+import com.github.jsocle.form.validators.Validator
 import com.github.jsocle.html.Node
 
-public abstract class Field<T : Any?, N : Node>(protected val mapper: FieldMapper<T>,
-                                                public val defaults: List<T>) {
-    public val errors: MutableList<String> = arrayListOf()
-    private var _values: List<T> = listOf()
-    public var values: List<T>
+abstract class Field<T : Any, N : Node>(protected val mapper: FieldMapper<T>,
+                                        val defaults: List<T?>, private val validators: Array<Validator<T>>) {
+    val errors: MutableList<String> = arrayListOf()
+    private var _values: List<T?> = listOf()
+    var values: List<T?>
         get() = _values
-        set(values: List<T>) {
+        set(values: List<T?>) {
             rawFromValues = true
             _values = values
         }
     private var rawFromValues = false
     private var _raw: Array<String> = arrayOf()
-    public val raw: Array<String>
+    val raw: Array<String>
         get() {
             if (!rawFromValues) {
                 return _raw
@@ -22,12 +23,12 @@ public abstract class Field<T : Any?, N : Node>(protected val mapper: FieldMappe
             return values.map { mapper.toString(it) }.filter { it != null }.map { it!! }.toTypedArray()
         }
 
-    public var name: String = ""
+    var name: String = ""
         private set
-    public var form: Form? = null
+    var form: Form? = null
         private set
 
-    fun initialize(form: Form, name: String) {
+    internal fun initialize(form: Form, name: String) {
         if (this.form == null) {
             this.form = form;
             this.name = name
@@ -41,9 +42,13 @@ public abstract class Field<T : Any?, N : Node>(protected val mapper: FieldMappe
         }
     }
 
-    public abstract fun render(): N
+    internal fun validate() {
+        validators.forEach { it(this) }
+    }
 
-    public fun render(map: N.() -> Unit): N {
+    abstract fun render(): N
+
+    fun render(map: N.() -> Unit): N {
         val node = render()
         node.map()
         return node

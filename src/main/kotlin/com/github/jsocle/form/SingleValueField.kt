@@ -1,10 +1,11 @@
 package com.github.jsocle.form
 
+import com.github.jsocle.form.validators.Validator
 import com.github.jsocle.html.Node
 
-public abstract class SingleValueField<T, N : Node>(mapper: FieldMapper<T>, @Suppress("BASE_WITH_NULLABLE_UPPER_BOUND") public val default: T? = null) :
-        Field<T, N>(mapper, default?.toList() ?: listOf()) {
-    public var value: T?
+abstract class SingleValueField<T : Any, N : Node>(mapper: FieldMapper<T>, val default: T? = null, validators: Array<Validator<T>>) :
+        Field<T, N>(mapper, default?.toList() ?: listOf(), validators) {
+    var value: T?
         get() {
             // values.firstOrNull() dose not work
             if (values.size() == 0) {
