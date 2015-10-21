@@ -27,10 +27,10 @@ public abstract class Field<T : Any?, N : Node>(protected val mapper: FieldMappe
     public var form: Form? = null
         private set
 
-    fun initialize(form: Form, propertyMetadata: PropertyMetadata) {
+    fun initialize(form: Form, name: String) {
         if (this.form == null) {
             this.form = form;
-            this.name = propertyMetadata.name
+            this.name = name
 
             if (form.parameters.size() == 0) {
                 values = defaults

@@ -9,7 +9,7 @@ public abstract class Form(parameters: Map<String, Array<String>>? = null,
     }
 
     operator protected fun <T : Field<*, *>> T.get(form: Form, propertyMetadata: PropertyMetadata): T {
-        initialize(form, propertyMetadata)
+        initialize(form, propertyMetadata.name)
         return this
     }
 }
