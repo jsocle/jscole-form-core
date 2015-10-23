@@ -1,12 +1,14 @@
 package com.github.jsocle.form
 
+import kotlin.reflect.KProperty
+
 public abstract class Form(parameters: Map<String, Array<String>>? = null,
                            val trim: Boolean = true) {
     val hasErrors: Boolean get() = errors.isNotEmpty()
 
     val fields: Array<Field<*, *>> by lazy(LazyThreadSafetyMode.NONE) {
         javaClass.methods
-                .filter { it.name.startsWith("get") && it.name.length() > 3 }
+                .filter { it.name.startsWith("get") && it.name.length > 3 }
                 .filter { Field::class.java.isAssignableFrom(it.returnType) }
                 .map { it(this@Form) as Field<*, *> }
                 .toTypedArray()
@@ -21,7 +23,7 @@ public abstract class Form(parameters: Map<String, Array<String>>? = null,
         this.parameters = parameters ?: request.parameters()
     }
 
-    operator protected fun <T : Field<*, *>> T.get(form: Form, propertyMetadata: PropertyMetadata): T {
+    operator protected fun <T : Field<*, *>> T.getValue(form: Form, propertyMetadata: KProperty<*>): T {
         initialize(form, propertyMetadata.name)
         return this
     }

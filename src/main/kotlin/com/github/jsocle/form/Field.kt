@@ -34,7 +34,7 @@ abstract class Field<T : Any, N : Node>(protected val mapper: FieldMapper<T>,
             this.form = form;
             this.name = name
 
-            if (form.parameters.size() == 0) {
+            if (form.parameters.size == 0) {
                 values = defaults
             } else {
                 _raw = form.parameters[name] ?: arrayOf()

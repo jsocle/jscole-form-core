@@ -8,7 +8,7 @@ abstract class SingleValueField<T : Any, N : Node>(mapper: FieldMapper<T>, val d
     var value: T?
         get() {
             // values.firstOrNull() dose not work
-            if (values.size() == 0) {
+            if (values.size == 0) {
                 return null
             }
             return values.first()
