@@ -1,4 +1,7 @@
-package com.github.jsocle.form
+package com.github.jsocle.form.fieldMappers
+
+import com.github.jsocle.form.Field
+import com.github.jsocle.form.FieldMapper
 
 public class BooleanMapper : FieldMapper<Boolean>() {
     override fun toString(value: Boolean?): String? {

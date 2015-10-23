@@ -1,7 +1,7 @@
 package com.github.jsocle.form.fields
 
 import com.github.jsocle.form.SingleValueField
-import com.github.jsocle.form.StringFieldMapper
+import com.github.jsocle.form.fieldMappers.StringFieldMapper
 import com.github.jsocle.html.elements.Textarea
 
 class TextareaField(default: String? = null)
