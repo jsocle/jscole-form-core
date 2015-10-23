@@ -1,10 +1,9 @@
 package com.github.jsocle.form
 
-import com.github.jsocle.form.validators.Validator
 import com.github.jsocle.html.Node
 
-abstract class Field<T : Any, N : Node>(protected val mapper: FieldMapper<T>,
-                                        val defaults: List<T?>, private val validators: Array<Validator<T>>) {
+abstract class Field<T : Any, N : Node>(protected val mapper: FieldMapper<T>, val defaults: List<T?>) {
+    internal var _validators: Any? = null
     val hasErrors: Boolean get() = errors.isNotEmpty()
     val errors: MutableList<String> = arrayListOf()
     private var _values: List<T?> = listOf()
@@ -55,3 +54,12 @@ abstract class Field<T : Any, N : Node>(protected val mapper: FieldMapper<T>,
         return node
     }
 }
+
+val <F : Field<*, *>> F.validators: MutableList<(F) -> Unit>
+    get() {
+        if (_validators == null) {
+            _validators = arrayListOf<(F) -> Unit>()
+        }
+        @Suppress("UNCHECKED_CAST")
+        return _validators as MutableList<(F) -> Unit>
+    }

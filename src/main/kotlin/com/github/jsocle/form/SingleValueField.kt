@@ -1,10 +1,9 @@
 package com.github.jsocle.form
 
-import com.github.jsocle.form.validators.Validator
 import com.github.jsocle.html.Node
 
-abstract class SingleValueField<T : Any, N : Node>(mapper: FieldMapper<T>, val default: T? = null, validators: Array<Validator<T>>) :
-        Field<T, N>(mapper, default?.toList() ?: listOf(), validators) {
+abstract class SingleValueField<T : Any, N : Node>(mapper: FieldMapper<T>, val default: T? = null) :
+        Field<T, N>(mapper, default?.toList() ?: listOf()) {
     var value: T?
         get() {
             // values.firstOrNull() dose not work

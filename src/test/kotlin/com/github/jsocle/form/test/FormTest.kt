@@ -1,7 +1,9 @@
 package com.github.jsocle.form.test
 
 import com.github.jsocle.form.Form
+import com.github.jsocle.form.add
 import com.github.jsocle.form.fields.*
+import com.github.jsocle.form.validators
 import com.github.jsocle.form.validators.Required
 import com.github.jsocle.html.elements.Input
 import org.junit.Assert
@@ -138,7 +140,7 @@ public class FormTest {
     @Test
     fun testValidate() {
         class TestForm : Form() {
-            val string by StringField(validators = arrayOf(Required()))
+            val string by StringField().apply { validators.add(Required()) }
         }
 
         parameters()
@@ -148,6 +150,8 @@ public class FormTest {
         parameters(method = "POST")
         val form = TestForm()
         Assert.assertFalse(form.validateOnPost())
+        Assert.assertTrue(form.hasErrors)
+        Assert.assertTrue(form.string.hasErrors)
         Assert.assertEquals(listOf("This field is required."), form.string.errors)
     }
 
@@ -159,5 +163,12 @@ public class FormTest {
         }
 
         Assert.assertArrayEquals(arrayOf(form.id, form.password), form.fields)
+    }
+
+    @Test
+    fun testCollectionAdd() {
+        val list = arrayListOf(1)
+        list.add(2, 3, 4)
+        Assert.assertEquals(listOf(1, 2, 3, 4), list)
     }
 }

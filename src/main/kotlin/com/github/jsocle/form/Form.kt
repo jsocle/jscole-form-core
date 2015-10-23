@@ -40,3 +40,7 @@ public abstract class Form(parameters: Map<String, Array<String>>? = null,
         return !hasErrors
     }
 }
+
+fun <E> MutableCollection<E>.add(vararg items: E) {
+    addAll(items.toList())
+}

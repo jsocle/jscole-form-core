@@ -2,12 +2,10 @@ package com.github.jsocle.form.fields
 
 import com.github.jsocle.form.FieldMapper
 import com.github.jsocle.form.SingleValueField
-import com.github.jsocle.form.validators.Validator
 import com.github.jsocle.html.elements.Ul
 
-public open class RadioField<T : Any>(public var choices: List<Pair<T, String>>, mapper: FieldMapper<T>,
-                                      validators: Array<Validator<T>> = arrayOf()) :
-        SingleValueField<T, Ul>(mapper, validators = validators) {
+public open class RadioField<T : Any>(public var choices: List<Pair<T, String>>, mapper: FieldMapper<T>) :
+        SingleValueField<T, Ul>(mapper) {
     override fun render(): Ul {
         return Ul(class_ = "jsocle-form-field-radio") {
             choices.forEach {
