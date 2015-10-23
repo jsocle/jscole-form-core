@@ -1,7 +1,8 @@
-package com.github.jsocle.form.test
+package com.github.jsocle.form.test.fields
 
 import com.github.jsocle.form.Form
 import com.github.jsocle.form.fields.IntField
+import com.github.jsocle.form.test.parameters
 import org.junit.Assert
 import org.junit.Test
 

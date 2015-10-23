@@ -5,6 +5,7 @@ import com.github.jsocle.html.Node
 
 abstract class Field<T : Any, N : Node>(protected val mapper: FieldMapper<T>,
                                         val defaults: List<T?>, private val validators: Array<Validator<T>>) {
+    val hasErrors: Boolean get() = errors.isNotEmpty()
     val errors: MutableList<String> = arrayListOf()
     private var _values: List<T?> = listOf()
     var values: List<T?>

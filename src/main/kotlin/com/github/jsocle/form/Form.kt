@@ -2,6 +2,8 @@ package com.github.jsocle.form
 
 public abstract class Form(parameters: Map<String, Array<String>>? = null,
                            val trim: Boolean = true) {
+    val hasErrors: Boolean get() = errors.isNotEmpty()
+
     val fields: Array<Field<*, *>> by lazy(LazyThreadSafetyMode.NONE) {
         javaClass.methods
                 .filter { it.name.startsWith("get") && it.name.length() > 3 }
@@ -33,6 +35,6 @@ public abstract class Form(parameters: Map<String, Array<String>>? = null,
 
     open fun validate(): Boolean {
         fields.forEach { it.validate() }
-        return errors.isEmpty()
+        return !hasErrors
     }
 }
