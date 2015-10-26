@@ -10,7 +10,7 @@ class DateFieldMapper(format: String) : FieldMapper<Date>() {
     private val sdf = SimpleDateFormat(format)
 
     override fun fromString(field: Field<Date, *>, string: String?): Date? {
-        if (string == null) {
+        if (string?.isBlank() ?: true) {
             return null
         }
         try {

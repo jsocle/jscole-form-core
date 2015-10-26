@@ -10,11 +10,12 @@ import java.util.*
 class DateFieldTest {
     @Test
     fun test() {
-        parameters("valid" to "1234-05-06 12:34:56", "invalid" to "invalid")
+        parameters("valid" to "1234-05-06 12:34:56", "invalid" to "invalid", "empty" to " ")
         val form = object : Form() {
             val valid by DateField()
             val invalid by DateField()
             val changed by DateField()
+            val empty by DateField()
         }
 
         Assert.assertTrue(!form.valid.hasErrors)
@@ -23,6 +24,7 @@ class DateFieldTest {
         Assert.assertEquals(
                 """<input name="changed" type="text" value="1234-06-06 07:08:06">""", form.changed.render().toString()
         )
+        Assert.assertFalse(form.empty.hasErrors)
     }
 }
 
