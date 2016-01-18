@@ -1,6 +1,8 @@
 package com.github.jsocle.form
 
+import kotlin.collections.*
 import kotlin.reflect.KProperty
+import kotlin.text.startsWith
 
 public abstract class Form(parameters: Map<String, Array<String>>? = null,
                            val trim: Boolean = true) {

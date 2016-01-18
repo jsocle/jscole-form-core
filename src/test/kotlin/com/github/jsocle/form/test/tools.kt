@@ -1,6 +1,10 @@
 package com.github.jsocle.form.test
 
 import com.github.jsocle.form.request
+import kotlin.collections.groupBy
+import kotlin.collections.map
+import kotlin.collections.mapValues
+import kotlin.collections.toTypedArray
 
 object testRequest {
     val localParameters = ThreadLocal<Map<String, Array<String>>>()

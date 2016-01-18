@@ -3,6 +3,7 @@ package com.github.jsocle.form.fields
 import com.github.jsocle.form.FieldMapper
 import com.github.jsocle.form.SingleValueField
 import com.github.jsocle.html.elements.Ul
+import kotlin.collections.forEach
 
 public open class RadioField<T : Any>(public var choices: List<Pair<T, String>>, mapper: FieldMapper<T>) :
         SingleValueField<T, Ul>(mapper) {

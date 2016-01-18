@@ -5,6 +5,7 @@ import com.github.jsocle.form.FieldMapper
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.text.isBlank
 
 class DateFieldMapper(format: String) : FieldMapper<Date>() {
     private val sdf = SimpleDateFormat(format)

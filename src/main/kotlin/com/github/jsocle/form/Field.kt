@@ -1,6 +1,7 @@
 package com.github.jsocle.form
 
 import com.github.jsocle.html.Node
+import kotlin.collections.*
 
 abstract class Field<T : Any, N : Node>(protected val mapper: FieldMapper<T>, val defaults: List<T?>) {
     internal var _validators: Any? = null

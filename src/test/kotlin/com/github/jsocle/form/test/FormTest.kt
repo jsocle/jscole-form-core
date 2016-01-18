@@ -8,6 +8,10 @@ import com.github.jsocle.form.validators.Required
 import com.github.jsocle.html.elements.Input
 import org.junit.Assert
 import org.junit.Test
+import kotlin.collections.arrayListOf
+import kotlin.collections.listOf
+import kotlin.collections.setOf
+import kotlin.collections.toSet
 
 public class FormTest {
     @Test
